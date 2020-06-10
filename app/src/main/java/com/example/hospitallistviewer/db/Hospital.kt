@@ -1,4 +1,4 @@
-package com.example.hospitallistviewer
+package com.example.hospitallistviewer.db
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
