@@ -17,4 +17,7 @@ interface HospitalDao {
 
     @Query("SELECT * from hospital_table ORDER BY organisation_name ASC")
     fun getHospitals(): LiveData<List<Hospital>>
+
+    @Query("SELECT * FROM hospital_table WHERE organisation_code = :organisation_code ")
+    fun getHospitalsByOrganisationCode(organisation_code: String): Hospital
 }

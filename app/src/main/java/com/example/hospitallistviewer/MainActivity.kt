@@ -21,8 +21,8 @@ class MainActivity : AppCompatActivity() {
         hospitalViewModel.loadCSV()
 
         val recyclerView = findViewById<RecyclerView>(R.id.recyclerview)
-        val adapter = HospitalListAdapter(this){ hospital: Hospital, position: Int ->
-            hospitalItemClicked(hospital, position)
+        val adapter = HospitalListAdapter(this){ hospital: Hospital ->
+            hospitalItemClicked(hospital)
         }
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(this)
@@ -35,8 +35,12 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    private fun hospitalItemClicked(hospital: Hospital, position: Int){
-        println("XXXXXXXX" + hospital.organisation_name)
+    private fun hospitalItemClicked(hospital: Hospital){
+        val intent = Intent(this, HospitalDetailActivity::class.java)
+        intent.putExtra("organisation_code", hospital.organisation_code)
+
+
+        startActivity(intent)
 
     }
 }

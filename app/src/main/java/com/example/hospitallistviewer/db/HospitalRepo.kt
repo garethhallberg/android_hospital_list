@@ -8,6 +8,10 @@ class HospitalRepo(private val hospitalDao: HospitalDao) {
     // Observed LiveData will notify the observer when the data has changed.
     val allHospitals: LiveData<List<Hospital>> = hospitalDao.getHospitals()
 
+    fun getHospitalsByOrganisationCode(organisation_code: String): Hospital{
+        return hospitalDao.getHospitalsByOrganisationCode(organisation_code)
+    }
+
     suspend fun insert(hospital: Hospital) {
         hospitalDao.insert(hospital)
     }

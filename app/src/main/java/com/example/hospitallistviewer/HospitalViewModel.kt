@@ -28,8 +28,11 @@ class HospitalViewModel(application: Application) : AndroidViewModel(application
 
 
 
+    fun getHospitalsByOrganisationCode(organisationCode: String) : Hospital {
+        return repository.getHospitalsByOrganisationCode(organisationCode)
+    }
 
-    fun insertHospital(hospital: Hospital) = viewModelScope.launch(Dispatchers.IO) {
+    private fun insertHospital(hospital: Hospital) = viewModelScope.launch(Dispatchers.IO) {
         repository.insert(hospital)
     }
 
@@ -60,8 +63,8 @@ class HospitalViewModel(application: Application) : AndroidViewModel(application
                 continue
             }
 
-            println(row)
-            println(row.get(0))
+//            println(row)
+//            println(row.get(0))
             val organisation_id = row.get(0)
             val organisation_code = row.get(1)
             val organisation_type = row.get(2)

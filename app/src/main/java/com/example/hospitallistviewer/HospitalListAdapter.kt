@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.hospitallistviewer.db.Hospital
 
 class HospitalListAdapter internal constructor(
-    context: Context,  val clickListener: (Hospital, Int) -> Unit
+    context: Context,  val clickListener: (Hospital) -> Unit
 ) : RecyclerView.Adapter<HospitalListAdapter.HospitalHolder>() {
 
     private val inflater: LayoutInflater = LayoutInflater.from(context)
@@ -37,10 +37,10 @@ class HospitalListAdapter internal constructor(
     inner class HospitalHolder(hospitalItemView: View) : RecyclerView.ViewHolder(hospitalItemView) {
         val hospitalItemView: TextView = itemView.findViewById(R.id.textView)
 
-        fun bind(hospital: Hospital, position: Int, clickListener: (Hospital, Int) -> Unit) {
+        fun bind(hospital: Hospital, position: Int, clickListener: (Hospital) -> Unit) {
 
             hospitalItemView.text = hospital.organisation_name
-            itemView.setOnClickListener { clickListener(hospital, position)}
+            itemView.setOnClickListener { clickListener(hospital)}
 
         }
     }
