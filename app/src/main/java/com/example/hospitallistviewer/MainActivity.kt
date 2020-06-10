@@ -8,10 +8,13 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.hospitallistviewer.db.Hospital
+import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var hospitalViewModel: HospitalViewModel
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,9 +24,11 @@ class MainActivity : AppCompatActivity() {
         hospitalViewModel.loadCSV()
 
         val recyclerView = findViewById<RecyclerView>(R.id.recyclerview)
+
         val adapter = HospitalListAdapter(this){ hospital: Hospital ->
             hospitalItemClicked(hospital)
         }
+
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(this)
 
@@ -32,6 +37,24 @@ class MainActivity : AppCompatActivity() {
 
             hospitals?.let { adapter.setHospitals(hospitals) }
         })
+
+        btn_show_all.setOnClickListener {
+            hospitalViewModel.allHospitals.observe(this, Observer { hospitals ->
+                hospitals?.let { adapter.setHospitals(hospitals) }
+            })
+        }
+
+        btn_show_cornwall.setOnClickListener {
+
+
+            hospitalViewModel.allHospitals.observe(this, Observer { hospitals ->
+                // Update the cached copy of the words in the adapter.
+                val lessHospitals = hospitals.filter {  hospital ->
+                    hospital.county == "Cornwall"
+                }
+                hospitals?.let { adapter.setHospitals(lessHospitals) }
+            })
+        }
 
     }
 

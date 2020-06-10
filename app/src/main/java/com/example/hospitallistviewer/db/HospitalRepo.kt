@@ -6,10 +6,14 @@ class HospitalRepo(private val hospitalDao: HospitalDao) {
 
     // Room executes all queries on a separate thread.
     // Observed LiveData will notify the observer when the data has changed.
-    val allHospitals: LiveData<List<Hospital>> = hospitalDao.getHospitals()
+    var allHospitals: LiveData<List<Hospital>> = hospitalDao.getHospitals()
 
     fun getHospitalsByOrganisationCode(organisation_code: String): Hospital{
         return hospitalDao.getHospitalsByOrganisationCode(organisation_code)
+    }
+
+    fun getHospitalsByCounty(county: String){
+        allHospitals = hospitalDao.getHospitalsByCounty(county)
     }
 
     suspend fun insert(hospital: Hospital) {

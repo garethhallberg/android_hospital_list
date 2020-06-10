@@ -32,6 +32,14 @@ class HospitalViewModel(application: Application) : AndroidViewModel(application
         return repository.getHospitalsByOrganisationCode(organisationCode)
     }
 
+    fun getHospitalsByCounty(county: String) {
+        repository.getHospitalsByCounty(county)
+    }
+
+    fun getAllHospitals(){
+        allHospitals = repository.allHospitals
+    }
+
     private fun insertHospital(hospital: Hospital) = viewModelScope.launch(Dispatchers.IO) {
         repository.insert(hospital)
     }

@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">HospitalListViewer</string>
+    <string name="show_cornwall">Show Cornwall</string>
+    <string name="show_all">Show All</string>
 </resources>
