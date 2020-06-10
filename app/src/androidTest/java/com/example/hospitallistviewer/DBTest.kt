@@ -68,5 +68,38 @@ public class DBTest {
         assertEquals(allHospitals[0].organisation_code, hospital.organisation_code)
     }
 
+    @Test
+    @Throws(Exception::class)
+    fun insertAndGetHospitalByCounty() = runBlocking{
+        //insert
+        val hospital = Hospital(
+            "1421", "RV9HE",
+            "Hospital", "Mental Health Hospital", "NHS Sector",
+            "Visible", "TRUE",
+            "East Riding Community Hospital", "Swinemoor Lane",
+            "", "", "Beverley", "East Yorkshire",
+            "HU17 0FA", "53.853134155273400",
+            "-0.41147232055664100", "RV9",
+            "Humber NHS Foundation Trust", "01482 886600",
+            "newhospital@nhs.net", "http://www.humber.nhs.uk", ""
+        )
+        val hospital2 = Hospital(
+            "1422", "RV",
+            "Hospital", "Mental Health Hospital", "NHS Sector",
+            "Visible", "TRUE",
+            "West Riding Community Hospital", "Swinemoor Lane",
+            "", "", "Beverley", "West Yorkshire",
+            "HU17 0FA", "53.853134155273400",
+            "-0.41147232055664100", "RV9",
+            "Humber NHS Foundation Trust", "01482 886600",
+            "newhospital@nhs.net", "http://www.humber.nhs.uk", ""
+        )
+        mHospitalDao!!.insert(hospital)
+        mHospitalDao!!.insert(hospital2)
+        val allHospitals =
+            LiveDataTestUtil.getValue(mHospitalDao!!.getHospitalsByCounty("East Yorkshire"))
+        assertEquals(allHospitals[0].organisation_code, hospital.organisation_code)
+    }
+
 
 }

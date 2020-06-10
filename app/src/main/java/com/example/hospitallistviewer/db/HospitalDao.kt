@@ -20,4 +20,7 @@ interface HospitalDao {
 
     @Query("SELECT * FROM hospital_table WHERE organisation_code = :organisation_code ")
     fun getHospitalsByOrganisationCode(organisation_code: String): Hospital
+
+    @Query("SELECT * FROM hospital_table WHERE county = :county ")
+    fun getHospitalsByCounty(county: String): LiveData<List<Hospital>>
 }
