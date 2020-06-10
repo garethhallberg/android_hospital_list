@@ -12,9 +12,6 @@ class HospitalRepo(private val hospitalDao: HospitalDao) {
         return hospitalDao.getHospitalsByOrganisationCode(organisation_code)
     }
 
-    fun getHospitalsByCounty(county: String){
-        allHospitals = hospitalDao.getHospitalsByCounty(county)
-    }
 
     suspend fun insert(hospital: Hospital) {
         hospitalDao.insert(hospital)
