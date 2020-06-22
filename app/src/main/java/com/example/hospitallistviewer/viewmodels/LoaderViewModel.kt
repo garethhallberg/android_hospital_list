@@ -119,7 +119,8 @@ class LoaderViewModel(application: Application) : AndroidViewModel(application){
 
             insertHospital(hospital)
         }
-        dataIsLoaded = MutableLiveData(true)
+
+        dataIsLoaded.value = true
     }
 
 }

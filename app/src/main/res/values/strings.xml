@@ -2,4 +2,6 @@
     <string name="app_name">HospitalListViewer</string>
     <string name="show_cornwall">Show Cornwall</string>
     <string name="show_all">Show All</string>
+    <string name="loading_data">Loading the data. This may take a few moments</string>
+    <string name="go_to_list">Go to the list of hospitals</string>
 </resources>
