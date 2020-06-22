@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.lifecycle.ViewModelProvider
 import com.example.hospitallistviewer.db.Hospital
+import com.example.hospitallistviewer.viewmodels.HospitalViewModel
 import kotlinx.android.synthetic.main.activity_hospital_detail.*
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
