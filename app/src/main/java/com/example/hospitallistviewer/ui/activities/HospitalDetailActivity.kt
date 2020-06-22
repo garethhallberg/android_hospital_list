@@ -24,7 +24,7 @@ class HospitalDetailActivity : AppCompatActivity() {
         setupScreen(organisation_code)
     }
 
-    
+
     private fun setupScreen(organisationCode: String?){
         if (organisationCode != null){
             doAsync {
@@ -59,11 +59,41 @@ class HospitalDetailActivity : AppCompatActivity() {
             }
         }
 
-        if (hospital.sector != null){
-            if (hospital.sector!! !=  ""){
-                detailsString += "\n" + hospital.sector
+        if (hospital.address3 != null){
+            if (hospital.address3!! !=  ""){
+                detailsString += "\n" + hospital.address3
             }
         }
+
+        if (hospital.postcode != null){
+            if (hospital.postcode!! !=  ""){
+                detailsString += "\n" + hospital.postcode
+            }
+        }
+
+        if (hospital.parent_name != null){
+            if (hospital.parent_name!! !=  ""){
+                detailsString += "\n" + hospital.parent_name
+            }
+        }
+
+        if (hospital.sub_type != ""){
+            detailsString += "\n" + hospital.sub_type
+        }
+
+
+        if (hospital.sector!! !=  ""){
+            detailsString += "\n" + hospital.sector
+        }
+
+        if (hospital.phone != null){
+            if (hospital.phone!! !=  ""){
+                detailsString += "\n" + hospital.phone
+            }
+        }
+
+
+
 
         return detailsString
     }
