@@ -21,7 +21,8 @@ class HospitalListActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         hospitalViewModel = ViewModelProvider(this).get(HospitalViewModel::class.java)
-        hospitalViewModel.loadCSV()
+//        hospitalViewModel.loadCSV()
+        hospitalViewModel.getDataFromAPI()
 
         val adapter = HospitalListAdapter(this){ hospital: Hospital ->
             hospitalItemClicked(hospital)
