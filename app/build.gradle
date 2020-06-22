@@ -78,4 +78,7 @@ dependencies {
     //fuel
     implementation "com.github.kittinunf.fuel:fuel-android:2.2.3"
 
+    //androidx SharedPreferences
+    implementation "androidx.preference:preference:1.1.0"
+
 }

@@ -1,10 +1,12 @@
 package com.example.hospitallistviewer.viewmodels
 
 import android.app.Application
+import androidx.preference.PreferenceManager
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.hospitallistviewer.APIService
+import com.example.hospitallistviewer.HospitalApplication
 import com.example.hospitallistviewer.db.Hospital
 import com.example.hospitallistviewer.db.HospitalDatabase
 import com.example.hospitallistviewer.db.HospitalRepo
@@ -16,23 +18,34 @@ import org.jetbrains.anko.uiThread
 
 class LoaderViewModel(application: Application) : AndroidViewModel(application){
     private val repository: HospitalRepo
-
+    private val prefs = PreferenceManager.getDefaultSharedPreferences(HospitalApplication.appContext)
 
     var dataIsLoaded: MutableLiveData<Boolean> = MutableLiveData(false)
 
     init{
         val hospitalDao = HospitalDatabase.getDatabase(application, viewModelScope).hospitalDao()
         repository = HospitalRepo(hospitalDao)
+        downloadDataOrProceed()
+    }
 
+    private fun downloadDataOrProceed(){
+        val timeDataPersisted = prefs.getLong( "downloadTime", 0L)
+        if (timeDataPersisted != 0L){
+            dataIsLoaded.value = true
+        }
+        else{
+            getDataFromAPI()
+        }
+    }
+
+    fun setSharedPref(){
+        val nowSeconds = System.currentTimeMillis() / 1000
+        prefs.edit().putLong("downloadTime", nowSeconds).apply()
     }
 
 
     private fun insertHospital(hospital: Hospital) = viewModelScope.launch(Dispatchers.IO) {
         repository.insert(hospital)
-    }
-
-    private fun deleteAllExistingHospitals() = viewModelScope.launch(Dispatchers.IO){
-        repository.deleteAll()
     }
 
 
@@ -121,6 +134,9 @@ class LoaderViewModel(application: Application) : AndroidViewModel(application){
         }
 
         dataIsLoaded.value = true
+        setSharedPref()
     }
+
+
 
 }

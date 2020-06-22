@@ -20,7 +20,7 @@ class LoaderActivity : AppCompatActivity() {
         setContentView(R.layout.activity_loader)
 
         loaderViewModel = ViewModelProvider(this).get(LoaderViewModel::class.java)
-        loaderViewModel.getDataFromAPI()
+
 
         setUpScreen()
     }
