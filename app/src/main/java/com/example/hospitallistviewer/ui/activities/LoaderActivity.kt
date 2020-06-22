@@ -1,4 +1,4 @@
-package com.example.hospitallistviewer.ui
+package com.example.hospitallistviewer.ui.activities
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -18,10 +18,7 @@ class LoaderActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_loader)
-
         loaderViewModel = ViewModelProvider(this).get(LoaderViewModel::class.java)
-
-
         setUpScreen()
     }
 

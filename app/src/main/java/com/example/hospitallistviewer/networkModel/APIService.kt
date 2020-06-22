@@ -1,4 +1,4 @@
-package com.example.hospitallistviewer
+package com.example.hospitallistviewer.networkModel
 
 import com.github.kittinunf.fuel.Fuel
 

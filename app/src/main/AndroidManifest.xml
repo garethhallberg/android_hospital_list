@@ -13,15 +13,15 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ui.LoaderActivity">
+        <activity android:name=".ui.activities.LoaderActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".HospitalDetailActivity" />
-        <activity android:name=".ui.HospitalListActivity">
+        <activity android:name=".ui.activities.HospitalDetailActivity" />
+        <activity android:name=".ui.activities.HospitalListActivity">
         </activity>
     </application>
 

@@ -5,7 +5,7 @@ import androidx.preference.PreferenceManager
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.example.hospitallistviewer.APIService
+import com.example.hospitallistviewer.networkModel.APIService
 import com.example.hospitallistviewer.HospitalApplication
 import com.example.hospitallistviewer.db.Hospital
 import com.example.hospitallistviewer.db.HospitalDatabase
@@ -17,10 +17,10 @@ import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
 
 class LoaderViewModel(application: Application) : AndroidViewModel(application){
+    var dataIsLoaded: MutableLiveData<Boolean> = MutableLiveData(false)
+
     private val repository: HospitalRepo
     private val prefs = PreferenceManager.getDefaultSharedPreferences(HospitalApplication.appContext)
-
-    var dataIsLoaded: MutableLiveData<Boolean> = MutableLiveData(false)
 
     init{
         val hospitalDao = HospitalDatabase.getDatabase(application, viewModelScope).hospitalDao()
@@ -38,7 +38,7 @@ class LoaderViewModel(application: Application) : AndroidViewModel(application){
         }
     }
 
-    fun setSharedPref(){
+    private fun setSharedPref(){
         val nowSeconds = System.currentTimeMillis() / 1000
         prefs.edit().putLong("downloadTime", nowSeconds).apply()
     }
@@ -49,7 +49,7 @@ class LoaderViewModel(application: Application) : AndroidViewModel(application){
     }
 
 
-    fun getDataFromAPI(){
+    private fun getDataFromAPI(){
         doAsync {
             APIService()
                 .getCSVFile(){ success, data ->
@@ -67,7 +67,7 @@ class LoaderViewModel(application: Application) : AndroidViewModel(application){
         }
     }
 
-    fun persistDataToRoom(theData: String){
+    private fun persistDataToRoom(theData: String){
         val tsvReader = csvReader {
             charset = "UTF-8"
             quoteChar = '"'

@@ -1,8 +1,9 @@
-package com.example.hospitallistviewer
+package com.example.hospitallistviewer.ui.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.lifecycle.ViewModelProvider
+import com.example.hospitallistviewer.R
 import com.example.hospitallistviewer.db.Hospital
 import com.example.hospitallistviewer.viewmodels.HospitalViewModel
 import kotlinx.android.synthetic.main.activity_hospital_detail.*

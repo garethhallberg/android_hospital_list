@@ -1,4 +1,4 @@
-package com.example.hospitallistviewer.ui
+package com.example.hospitallistviewer.ui.activities
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -7,11 +7,10 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.hospitallistviewer.HospitalDetailActivity
-import com.example.hospitallistviewer.HospitalListAdapter
 import com.example.hospitallistviewer.viewmodels.HospitalViewModel
 import com.example.hospitallistviewer.R
 import com.example.hospitallistviewer.db.Hospital
+import com.example.hospitallistviewer.ui.adapters.HospitalListAdapter
 import kotlinx.android.synthetic.main.activity_main.*
 
 class HospitalListActivity : AppCompatActivity() {
@@ -25,13 +24,10 @@ class HospitalListActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         hospitalViewModel = ViewModelProvider(this).get(HospitalViewModel::class.java)
-//        hospitalViewModel.loadCSV()
-//        hospitalViewModel.getDataFromAPI()
-
-        val adapter =
-            HospitalListAdapter(this) { hospital: Hospital ->
+        val adapter = HospitalListAdapter(this) { hospital: Hospital ->
                 hospitalItemClicked(hospital)
             }
+
         setupRecyclerView(adapter)
         showAll(adapter)
 
