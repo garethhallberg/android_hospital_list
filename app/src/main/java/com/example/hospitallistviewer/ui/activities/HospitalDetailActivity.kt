@@ -20,16 +20,18 @@ class HospitalDetailActivity : AppCompatActivity() {
         setContentView(R.layout.activity_hospital_detail)
 
         hospitalViewModel = ViewModelProvider(this).get(HospitalViewModel::class.java)
-
         organisation_code = getIntent().getStringExtra("organisation_code")
-        if (organisation_code != null){
+        setupScreen(organisation_code)
+    }
+
+    
+    private fun setupScreen(organisationCode: String?){
+        if (organisationCode != null){
             doAsync {
-                val hospital = hospitalViewModel.getHospitalsByOrganisationCode(organisation_code!!)
+                val hospital = hospitalViewModel.getHospitalsByOrganisationCode(organisationCode!!)
                 uiThread {
                     tv_organisation_name.text = hospital.organisation_name
-
                     tv_hospital_details.text = formatHospitalDetails(hospital)
-
                 }
             }
         }
@@ -57,16 +59,11 @@ class HospitalDetailActivity : AppCompatActivity() {
             }
         }
 
-
         if (hospital.sector != null){
             if (hospital.sector!! !=  ""){
                 detailsString += "\n" + hospital.sector
             }
         }
-
-
-
-
 
         return detailsString
     }

@@ -17,21 +17,21 @@ class HospitalListActivity : AppCompatActivity() {
 
     private lateinit var hospitalViewModel: HospitalViewModel
 
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
         hospitalViewModel = ViewModelProvider(this).get(HospitalViewModel::class.java)
-        val adapter = HospitalListAdapter(this) { hospital: Hospital ->
-                hospitalItemClicked(hospital)
-            }
 
+        doSetup()
+    }
+
+    fun doSetup(){
+        val adapter = HospitalListAdapter(this) { hospital: Hospital ->
+            hospitalItemClicked(hospital)
+        }
         setupRecyclerView(adapter)
         showAll(adapter)
-
-       setupButtons(adapter)
+        setupButtons(adapter)
     }
 
     fun setupButtons(adapter: HospitalListAdapter){
@@ -72,8 +72,6 @@ class HospitalListActivity : AppCompatActivity() {
         val intent = Intent(this, HospitalDetailActivity::class.java)
         intent.putExtra("organisation_code", hospital.organisation_code)
 
-
         startActivity(intent)
-
     }
 }
