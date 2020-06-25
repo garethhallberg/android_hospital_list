@@ -17,6 +17,13 @@ class HospitalRepo(private val hospitalDao: HospitalDao) {
         hospitalDao.insert(hospital)
     }
 
+
+    suspend fun insertAll(hospitals: List<Hospital>)
+    {
+        hospitalDao.insertAll(hospitals)
+
+    }
+
     suspend fun deleteAll(){
         hospitalDao.deleteAll()
     }

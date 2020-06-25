@@ -14,6 +14,9 @@ interface HospitalDao {
     @Query("DELETE FROM hospital_table")
     suspend fun deleteAll()
 
+    @Insert
+    suspend fun insertAll(hospitals: List<Hospital>)
+
 
     @Query("SELECT * from hospital_table ORDER BY organisation_name ASC")
     fun getHospitals(): LiveData<List<Hospital>>

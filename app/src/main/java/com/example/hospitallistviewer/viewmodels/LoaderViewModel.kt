@@ -17,6 +17,7 @@ import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
 
 class LoaderViewModel(application: Application) : AndroidViewModel(application){
+
     var dataIsLoaded: MutableLiveData<Boolean> = MutableLiveData(false)
 
     private val repository: HospitalRepo
@@ -44,8 +45,10 @@ class LoaderViewModel(application: Application) : AndroidViewModel(application){
     }
 
 
-    private fun insertHospital(hospital: Hospital) = viewModelScope.launch(Dispatchers.IO) {
-        repository.insert(hospital)
+
+
+    private fun insertHospitals(hospitals: List<Hospital>) = viewModelScope.launch(Dispatchers.IO) {
+        repository.insertAll(hospitals)
     }
 
 
@@ -77,6 +80,7 @@ class LoaderViewModel(application: Application) : AndroidViewModel(application){
 
         val rows: List<List<String>> = tsvReader.readAll(theData)
 
+        val hospitalsList: MutableList<Hospital> = mutableListOf()
         var rowNumber = 0
         for (row in rows) {
             if (rowNumber == 0) {
@@ -129,10 +133,11 @@ class LoaderViewModel(application: Application) : AndroidViewModel(application){
                 phone,
                 email, website, fax
             )
-
-            insertHospital(hospital)
+            hospitalsList.add(hospital)
         }
 
+
+        insertHospitals(hospitalsList)
         dataIsLoaded.value = true
         setSharedPref()
     }
